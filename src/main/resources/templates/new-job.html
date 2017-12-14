@@ -2,34 +2,74 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head">
 </head>
-<body>
+<body class="container">
 
 <div th:replace="fragments :: page-header"></div>
+<br/>
+
 
 <div class="container body-content">
+    <div class="form-group">
+        <!--Below I use the hasErrors to make a conditional that will make-->
+        <!--the badge appear if there is an error nor not-->
+
+        <!--Call the object in that you are going to manipulate,
+        via th:object. This is now accessible in the rest of the form,
+        *{} lets us access the values inside the fields of our Object-->
 
     <form th:object="${jobForm}" method="post">
 
         <div class="form-group">
             <label th:for="name">Name</label>
-            <input th:field="*{name}" />
+            <input th:field="*{name}" class="form-control" />
+            <span th:if="${#fields.hasErrors('name')}" class="badge badge-primary">Hey!</span>
             <div th:errors="*{name}"></div>
-        </div>
 
-        <div class="form-group">
+            <br/>
+
             <label th:for="employerId">Employer</label>
-            <select th:field="*{employerId}">
+            <select th:field="*{employer}" class="form-control">
                 <option th:each="employer : *{employers}"
-                        th:value="${employer.id}"
+                        th:value="${employer.value}"
                         th:text="${employer.value}"></option>
+            </select>
+
+
+        <!-- TODO #5 - Create <select> dropdowns for other job fields -->
+            <br/>
+
+            <label th:for="locationId">Location</label>
+            <select th:field="*{location}" class="form-control">
+                <option th:each="location : *{locations}"
+                        th:value="${location.value}"
+                        th:text="${location.value}"></option>
+            </select>
+
+            <br/>
+
+            <label th:for="coreCompetency">Skill</label>
+            <select th:field="*{coreCompetency}" class="form-control">
+                <option th:each="coreCompetency : *{coreCompetencies}"
+                        th:value="${coreCompetency.value}"
+                        th:text="${coreCompetency.value}">
+                </option>
+            </select>
+
+            <br/>
+
+            <label th:for="positionType">Position Type</label>
+            <select th:field="*{positionType}" class="form-control">
+                <option th:each="positionType : *{positionTypes}"
+                        th:value="${positionType.value}"
+                        th:text="${positionType.value}">
+                </option>
             </select>
         </div>
 
-        <!-- TODO #5 - Create <select> dropdowns for other job fields -->
-
-        <input type="submit" value="Add Job" />
+        <br/>
+        <input class="form-control" type="submit" value="Add Job" />
     </form>
-
+    </div>
 </div>
 
 </body>

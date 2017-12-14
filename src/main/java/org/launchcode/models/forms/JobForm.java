@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class JobForm {
 
     @NotNull
-    @Size(min=1, message = "Name may not be empty")
+    @Size(min=1, message = "Your job must have a name!")
     private String name;
 
     @NotNull
@@ -27,11 +27,27 @@ public class JobForm {
         with correct validation attributes and display names.
         Don't forget to add getters and setters
      */
+    @NotNull
+    private int locationId;
+
+    @NotNull
+    private int coreCompetencyId;
+
+    @NotNull
+    private int positionTypeId;
+
+
+    private Employer employer;
+    private Location location;
+    private CoreCompetency coreCompetency;
+    private PositionType positionType;
 
     private ArrayList<Employer> employers;
     private ArrayList<Location> locations;
     private ArrayList<CoreCompetency> coreCompetencies;
     private ArrayList<PositionType> positionTypes;
+
+
 
     public JobForm() {
 
@@ -42,6 +58,10 @@ public class JobForm {
         */
 
         employers = jobData.getEmployers().findAll();
+        locations = jobData.getLocations().findAll();
+        coreCompetencies = jobData.getCoreCompetencies().findAll();
+        positionTypes = jobData.getPositionTypes().findAll();
+
 
     }
 
@@ -92,4 +112,63 @@ public class JobForm {
     public void setPositionTypes(ArrayList<PositionType> positionTypes) {
         this.positionTypes = positionTypes;
     }
+
+
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public int getCoreCompetencyId() {
+        return coreCompetencyId;
+    }
+
+    public int getPositionTypeId() {
+        return positionTypeId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public void setCoreCompetencyId(int coreCompetenciesId) {
+        this.coreCompetencyId = coreCompetenciesId;
+    }
+
+    public void setPositionTypeId(int positionTypesId) {
+        this.positionTypeId = positionTypesId;
+    }
+
+
+    public Employer getEmployer() {
+        return employer;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public CoreCompetency getCoreCompetency() {
+        return coreCompetency;
+    }
+
+    public PositionType getPositionType() {
+        return positionType;
+    }
+
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public void setCoreCompetency(CoreCompetency coreCompetency) {
+        this.coreCompetency = coreCompetency;
+    }
+
+    public void setPositionType(PositionType positionType) {
+        this.positionType = positionType;
+    }
 }
+
